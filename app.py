@@ -4,7 +4,8 @@ import boto3
 import pdfplumber
 import json
 import logging
-from dotenv import load_dotenv  # Import dotenv
+from dotenv import load_dotenv
+import requests  # For Google API calls
 
 # Load environment variables from .env file
 load_dotenv()
@@ -17,10 +18,11 @@ AUDIO_FOLDER = os.getenv("AUDIO_FOLDER", "static/audio")
 AWS_REGION = os.getenv("AWS_DEFAULT_REGION", "us-east-1")
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")  # New Google API key
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['AUDIO_FOLDER'] = AUDIO_FOLDER
-app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024  # 16 MB limit
+app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024  # 50 MB limit
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -35,6 +37,39 @@ ALLOWED_EXTENSIONS = {'pdf'}
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+def convert_text_to_braille(text, api_key):
+    """Convert text to Braille using Google's Text-to-Speech API"""
+    try:
+        url = "https://texttospeech.googleapis.com/v1/text:synthesize"
+        headers = {
+            "Content-Type": "application/json",
+            "X-Goog-Api-Key": api_key
+        }
+        
+        payload = {
+            "input": {
+                "text": text
+            },
+            "voice": {
+                "languageCode": "en-US"
+            },
+            "audioConfig": {
+                "audioEncoding": "LINEAR16",
+                "speakingRate": 1.0
+            },
+            "enableBraille": True  # Request Braille output
+        }
+        
+        response = requests.post(url, headers=headers, json=payload)
+        response.raise_for_status()
+        
+        data = response.json()
+        braille_text = data.get("braille", {}).get("braille", "Braille conversion failed")
+        return braille_text
+        
+    except Exception as e:
+        logging.error(f"Error converting text to Braille: {e}")
+        return "Braille conversion unavailable"
 
 # Extract text from PDF
 def extract_text_from_pdf(pdf_path):
@@ -60,8 +95,8 @@ def summarize_text_with_bedrock(text):
         bedrock_client = boto3.client(
             "bedrock-runtime",
             region_name='us-east-1',
-            aws_access_key_id=AWS_ACCESS_KEY_ID,  # Using environment variables
-            aws_secret_access_key=AWS_SECRET_ACCESS_KEY  # Using environment variables
+            aws_access_key_id=AWS_ACCESS_KEY_ID,
+            aws_secret_access_key=AWS_SECRET_ACCESS_KEY
         )
         text += " Summarize the above in 7 to 8 lines."
         prompt = (
@@ -82,8 +117,8 @@ def convert_text_to_audio_with_polly(text, output_path):
         polly_client = boto3.client(
             "polly",
             region_name=AWS_REGION,
-            aws_access_key_id=AWS_ACCESS_KEY_ID,  # Using environment variables
-            aws_secret_access_key=AWS_SECRET_ACCESS_KEY  # Using environment variables
+            aws_access_key_id=AWS_ACCESS_KEY_ID,
+            aws_secret_access_key=AWS_SECRET_ACCESS_KEY
         )
         response = polly_client.synthesize_speech(
             Text=text,
@@ -121,9 +156,18 @@ def index():
             convert_text_to_audio_with_polly(summary, audio_path)
             logging.info(f"Generated audio at {audio_path}")
             
-            # Return page with audio
+            # Convert to Braille
+            braille_text = convert_text_to_braille(summary, GOOGLE_API_KEY)
+            logging.info("Converted summary to Braille.")
+            
+            # Return page with audio and braille
             audio_url = url_for("static", filename=f"audio/{audio_filename}")
-            return render_template("index.html", audio_url=audio_url)
+            return render_template(
+                "index.html", 
+                audio_url=audio_url,
+                braille_text=braille_text,
+                summary_text=summary
+            )
         
         except Exception as e:
             logging.error(f"An error occurred during processing: {e}")
@@ -131,5 +175,5 @@ def index():
     
     return render_template("index.html")
 
-if __name__ == "__main__":  # Corrected from _name to _name_
-    app.run(debug=False, host='0.0.0.0', port=8000)  # Set debug=False for production
+if __name__ == "__main__":
+    app.run(debug=False, host='0.0.0.0', port=8000)
