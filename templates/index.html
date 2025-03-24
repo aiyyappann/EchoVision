@@ -17,133 +17,162 @@
     <!-- Custom CSS -->
     <style>
       /* (Existing CSS unchanged) */
-      body {
+      :root {
+        /* Color Palette */
+        --primary-gradient-start: #6a11cb;
+        --primary-gradient-end: #2575fc;
+        --secondary-gradient-start: #ff7eb3;
+        --secondary-gradient-end: #ff758c;
+        --background-dark: #121212;
+        --text-light: #ffffff;
+        --text-subtle: #e0e0e0;
+        --blur-intensity: 15px;
+      }
+
+      * {
         margin: 0;
-        font-family: "Poppins", sans-serif;
-        background: linear-gradient(135deg, #6a11cb, #2575fc);
-        color: #ffffff;
+        padding: 0;
+        box-sizing: border-box;
+        transition: all 0.3s ease-in-out;
+      }
+
+      body {
+        font-family: "Inter", "Poppins", sans-serif;
+        background: linear-gradient(
+          135deg,
+          var(--primary-gradient-start),
+          var(--primary-gradient-end)
+        );
+        color: var(--text-light);
         min-height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 2rem 0;
+        perspective: 1000px;
+        overflow-x: hidden;
       }
+
       .container {
-        max-width: 800px;
+        max-width: 900px;
+        width: 95%;
         background: rgba(255, 255, 255, 0.1);
-        border-radius: 20px;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
+        border-radius: 25px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1),
+          0 5px 15px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(var(--blur-intensity));
+        -webkit-backdrop-filter: blur(var(--blur-intensity));
         border: 1px solid rgba(255, 255, 255, 0.3);
-        margin: auto;
-        padding: 2.5rem;
-        text-align: center;
+        padding: 3rem;
+        transform-style: preserve-3d;
+        transform: rotateX(5deg) scale(0.98);
+        opacity: 0.95;
+        transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
       }
+
+      .container:hover {
+        transform: rotateX(0) scale(1);
+        opacity: 1;
+      }
+
       h1 {
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
-        font-weight: 600;
-        color: #ffffff;
+        font-size: 3rem;
+        font-weight: 700;
+        background: linear-gradient(
+          45deg,
+          var(--secondary-gradient-start),
+          var(--secondary-gradient-end)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 1.5rem;
+        text-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        letter-spacing: -1px;
       }
-      label {
-        font-weight: 400;
-        color: #f0f0f0;
-      }
+
       .btn-custom {
-        background: linear-gradient(135deg, #ff7eb3, #ff758c);
-        color: #ffffff;
-        font-size: 1.2rem;
-        padding: 0.7rem 1.5rem;
+        background: linear-gradient(
+          135deg,
+          var(--secondary-gradient-start),
+          var(--secondary-gradient-end)
+        );
+        color: var(--text-light);
+        padding: 0.8rem 2rem;
         border: none;
-        border-radius: 30px;
-        margin-top: 1rem;
-        transition: all 0.3s ease-in-out;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 10px 20px rgba(255, 126, 179, 0.4),
+          0 5px 10px rgba(255, 117, 140, 0.3);
+        transform: translateY(-3px);
+        text-transform: uppercase;
+        letter-spacing: 1px;
       }
+
       .btn-custom:hover {
-        background: linear-gradient(135deg, #ff758c, #ff3d68);
-        transform: scale(1.05);
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        transform: translateY(-6px) scale(1.05);
+        box-shadow: 0 15px 25px rgba(255, 126, 179, 0.5),
+          0 8px 15px rgba(255, 117, 140, 0.4);
       }
+
+      .btn-custom:active {
+        transform: translateY(0) scale(0.95);
+        box-shadow: 0 5px 10px rgba(255, 126, 179, 0.3),
+          0 2px 5px rgba(255, 117, 140, 0.2);
+      }
+
       .results-section {
-        margin-top: 2.5rem;
-        text-align: left;
-        background: rgba(255, 255, 255, 0.1);
-        padding: 1.5rem;
-        border-radius: 15px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+        padding: 2rem;
+        margin-top: 2rem;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
       }
-      .results-section h2 {
-        font-size: 1.8rem;
-        margin-bottom: 1rem;
-        color: #ffffff;
-        border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-        padding-bottom: 0.5rem;
-      }
-      .audio-container {
-        margin: 1.5rem 0;
-      }
-      .audio-container audio {
-        width: 100%;
-        margin-top: 1rem;
-      }
-      .btn-download {
-        margin-top: 1rem;
-        background: linear-gradient(135deg, #36d1dc, #5b86e5);
-        color: #ffffff;
-        border: none;
-        padding: 0.7rem 1.5rem;
-        border-radius: 30px;
-        font-size: 1rem;
-        transition: all 0.3s ease-in-out;
-        display: inline-block;
-      }
-      .btn-download:hover {
-        background: linear-gradient(135deg, #5b86e5, #36d1dc);
-        transform: scale(1.05);
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      }
+
       .braille-output {
-        background-color: rgba(0, 0, 0, 0.2);
+        background: rgba(246, 67, 67, 0.2);
+        border-radius: 15px;
         padding: 1.5rem;
-        border-radius: 10px;
-        margin-top: 1rem;
-        font-family: "Courier New", monospace;
-        font-size: 1.5rem;
-        line-height: 2rem;
-        white-space: pre-wrap;
-        word-wrap: break-word;
-      }
-      .summary-text {
-        background-color: rgba(0, 0, 0, 0.1);
-        padding: 1.5rem;
-        border-radius: 10px;
+        font-family: "Courier Prime", "Courier New", monospace;
         line-height: 1.6;
+        letter-spacing: 1px;
+        border: 1px solid rgba(247, 154, 154, 0.1);
       }
-      .action-buttons {
-        display: flex;
-        gap: 1rem;
-        justify-content: center;
-        margin-top: 1.5rem;
-        flex-wrap: wrap;
-      }
+
       @media (max-width: 768px) {
         .container {
-          padding: 1.5rem;
-          margin: 1rem;
+          padding: 2rem;
+          width: 90%;
         }
+
         h1 {
-          font-size: 2rem;
+          font-size: 2.5rem;
         }
-        .braille-output {
-          font-size: 1.2rem;
-          padding: 1rem;
+      }
+
+      /* Subtle Animations */
+      @keyframes float {
+        0% {
+          transform: translateY(0px);
         }
+        50% {
+          transform: translateY(-10px);
+        }
+        100% {
+          transform: translateY(0px);
+        }
+      }
+
+      .floating-element {
+        animation: float 4s ease-in-out infinite;
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <h1>Research EchoPedia</h1>
+      <h1>Buddy</h1>
       <p>
         Upload your file and get a summarized audio file with Braille pdf as
         well!
