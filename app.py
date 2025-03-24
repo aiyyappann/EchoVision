@@ -306,5 +306,5 @@ def download_braille(pdf_filename):
         logging.error(f"Error in download_braille route: {e}", exc_info=True)
         return "Failed to generate Braille PDF.", 500
 if __name__ == "__main__":
-    print("\n\n\n Starting the application \n\n\n")
+    print("\n\n\n Starting the application")
     app.run(debug=False, host='0.0.0.0', port=8000)
