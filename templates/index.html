@@ -1,120 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Research - Paper Summarizer </title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Research Paper Summarizer</title>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
     <!-- Add Bootstrap for responsiveness -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <!-- Custom CSS -->
     <style>
-        /* General Styles */
-        body {
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
-            color: #ffffff;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
+      /* (Existing CSS unchanged) */
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        color: #ffffff;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem 0;
+      }
+      .container {
+        max-width: 800px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        margin: auto;
+        padding: 2.5rem;
+        text-align: center;
+      }
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+        color: #ffffff;
+      }
+      label {
+        font-weight: 400;
+        color: #f0f0f0;
+      }
+      .btn-custom {
+        background: linear-gradient(135deg, #ff7eb3, #ff758c);
+        color: #ffffff;
+        font-size: 1.2rem;
+        padding: 0.7rem 1.5rem;
+        border: none;
+        border-radius: 30px;
+        margin-top: 1rem;
+        transition: all 0.3s ease-in-out;
+      }
+      .btn-custom:hover {
+        background: linear-gradient(135deg, #ff758c, #ff3d68);
+        transform: scale(1.05);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      }
+      .results-section {
+        margin-top: 2.5rem;
+        text-align: left;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 1.5rem;
+        border-radius: 15px;
+      }
+      .results-section h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        color: #ffffff;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        padding-bottom: 0.5rem;
+      }
+      .audio-container {
+        margin: 1.5rem 0;
+      }
+      .audio-container audio {
+        width: 100%;
+        margin-top: 1rem;
+      }
+      .btn-download {
+        margin-top: 1rem;
+        background: linear-gradient(135deg, #36d1dc, #5b86e5);
+        color: #ffffff;
+        border: none;
+        padding: 0.7rem 1.5rem;
+        border-radius: 30px;
+        font-size: 1rem;
+        transition: all 0.3s ease-in-out;
+        display: inline-block;
+      }
+      .btn-download:hover {
+        background: linear-gradient(135deg, #5b86e5, #36d1dc);
+        transform: scale(1.05);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      }
+      .braille-output {
+        background-color: rgba(0, 0, 0, 0.2);
+        padding: 1.5rem;
+        border-radius: 10px;
+        margin-top: 1rem;
+        font-family: "Courier New", monospace;
+        font-size: 1.5rem;
+        line-height: 2rem;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+      .summary-text {
+        background-color: rgba(0, 0, 0, 0.1);
+        padding: 1.5rem;
+        border-radius: 10px;
+        line-height: 1.6;
+      }
+      .action-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 1.5rem;
+        flex-wrap: wrap;
+      }
+      @media (max-width: 768px) {
         .container {
-            max-width: 600px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            margin: auto;
-            padding: 2rem;
-            text-align: center;
+          padding: 1.5rem;
+          margin: 1rem;
         }
-
         h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-            color: #ffffff;
+          font-size: 2rem;
         }
-
-        label {
-            font-weight: 400;
-            color: #f0f0f0;
+        .braille-output {
+          font-size: 1.2rem;
+          padding: 1rem;
         }
-
-        .btn-custom {
-            background: linear-gradient(135deg, #ff7eb3, #ff758c);
-            color: #ffffff;
-            font-size: 1.2rem;
-            padding: 0.7rem 1.5rem;
-            border: none;
-            border-radius: 30px;
-            margin-top: 1rem;
-            transition: all 0.3s ease-in-out;
-        }
-
-        .btn-custom:hover {
-            background: linear-gradient(135deg, #ff758c, #ff3d68);
-            transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .audio-container {
-            margin-top: 2rem;
-        }
-
-        .audio-container audio {
-            width: 100%;
-            margin-top: 1rem;
-        }
-
-        .download-btn {
-            margin-top: 1rem;
-            background: linear-gradient(135deg, #36d1dc, #5b86e5);
-            color: #ffffff;
-            border: none;
-            padding: 0.7rem 1.5rem;
-            border-radius: 30px;
-            font-size: 1rem;
-            transition: all 0.3s ease-in-out;
-        }
-
-        .download-btn:hover {
-            background: linear-gradient(135deg, #5b86e5, #36d1dc);
-            transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <h1>Research EchoPedia</h1>
-        <p>Upload your Research Paper, get a summarized audio file, and enjoy!</p>
-        <form id="uploadForm" action="/" method="POST" enctype="multipart/form-data">
-            <div class="mb-3">
-                <label for="pdf" class="form-label">Upload Your PDF File</label>
-                <input type="file" id="pdf" name="pdf" class="form-control" accept=".pdf" required>
-            </div>
-            <button type="submit" class="btn btn-custom">Generate Audio</button>
-        </form>
-
-        {% if audio_url %}
-        <div class="audio-container">
-            <audio controls>
-                <source src="{{ audio_url }}" type="audio/mp3">
-                Your browser does not support the audio element.
-            </audio>
-            <a href="{{ audio_url }}" class="btn download-btn" download>Download Audio</a>
+      <h1>Research EchoPedia</h1>
+      <p>
+        Upload your Research Paper and get a summarized audio file with Braille
+        text
+      </p>
+      <form
+        id="uploadForm"
+        action="/"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <div class="mb-3">
+          <label for="pdf" class="form-label">Upload Your PDF File</label>
+          <input
+            type="file"
+            id="pdf"
+            name="pdf"
+            class="form-control"
+            accept=".pdf"
+            required
+          />
         </div>
-        {% endif %}
+        <button type="submit" class="btn btn-custom">Generate Summary</button>
+      </form>
+
+      {% if audio_url %}
+      <div class="results-section">
+        <h2>Summary</h2>
+        <div class="summary-text">{{ summary_text }}</div>
+
+        <h2>Audio Version</h2>
+        <div class="audio-container">
+          <audio controls>
+            <source src="{{ audio_url }}" type="audio/mp3" />
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+
+        <div class="action-buttons">
+          <a href="{{ audio_url }}" class="btn btn-download" download
+            >Download Audio</a
+          >
+          <button
+            onclick="copyToClipboard('{{ summary_text }}')"
+            class="btn btn-download"
+            style="background: linear-gradient(135deg, #4facfe, #00f2fe)"
+          >
+            Copy Summary
+          </button>
+        </div>
+
+        <h2>Braille Version</h2>
+        <div class="braille-output">{{ braille_text }}</div>
+
+        <div class="action-buttons">
+          <button
+            onclick="copyToClipboard('{{ braille_text }}')"
+            class="btn btn-download"
+            style="background: linear-gradient(135deg, #a6c1ee, #fbc2eb)"
+          >
+            Copy Braille
+          </button>
+
+          <!-- 
+                  NEW: Hidden input to store the PDF filename, 
+                  plus a "Download Braille" button that calls the new route 
+                -->
+          <form
+            action="{{ url_for('download_braille', pdf_filename=pdf_filename) }}"
+            method="GET"
+          >
+            <button
+              type="submit"
+              class="btn btn-download"
+              style="background: linear-gradient(135deg, #ffa17f, #00223e)"
+            >
+              Download Braille .doc
+            </button>
+          </form>
+        </div>
+      </div>
+      {% endif %}
     </div>
 
-
-</body>
+    <script>
+      function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(
+          function () {
+            alert("Copied to clipboard!");
+          },
+          function (err) {
+            alert("Could not copy text: " + err);
+          }
+        );
+      }
+    </script>
+  </body>
 </html>
