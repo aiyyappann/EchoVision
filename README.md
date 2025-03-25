@@ -1,4 +1,4 @@
-# Research Echopedia 🎤📚
+# EchoVision 🎤📚
 
 **Transforming IEEE-format Research Papers into Concise, Portable Audio Summaries**
 
@@ -6,7 +6,7 @@
 
 ## 📖 Overview
 
-The **Research Echopedia** project enhances the accessibility of IEEE-format research papers by converting their dense technical content into concise, portable audio summaries. This system uses a three-stage pipeline:  
+The **EchoVision** project enhances the accessibility of IEEE-format research papers by converting dense technical content into concise, portable audio summaries. This system uses a three-stage pipeline:
 1. **Text Extraction** with **pdfplumber**
 2. **Summarization** with **AWS Bedrock's LLaMA model**
 3. **Audio Conversion** using **Amazon Polly**
@@ -21,7 +21,7 @@ The downloadable audio outputs provide a flexible and engaging way to consume ac
 The system accepts IEEE-format PDF papers, extracting text from both columns using **pdfplumber**.
 
 - **Input Format Handling**: Supports PDF files, typical in academic dissemination.
-- **Text Extraction**: Using pdfplumber to handle complex layouts with two columns, ensuring accurate content capture.
+- **Text Extraction**: Uses pdfplumber to handle complex layouts with two columns, ensuring accurate content capture.
 - **Preprocessing**: Text cleaning, normalization, and segmentation for effective summarization.
 
 ### 2️⃣ **Summarization**  
@@ -58,19 +58,9 @@ The preprocessed text is fed into **AWS Bedrock’s LLaMA model** to generate cl
 
 ---
 
-## 🖼️ Workflow
-
-![WorkFlow](https://github.com/user-attachments/assets/99cdd3c5-95a7-4c4c-b1df-e3f738e09902)
-
-_The automated pipeline for text extraction, summarization, and audio conversion._
-
----
-
 ## 🏆 Results
 
 The system effectively generates audio summaries from IEEE research papers, enhancing academic content accessibility. It allows users to consume complex research on-the-go, whether for study, research, or leisure.
-![Results](https://github.com/user-attachments/assets/b5428672-7c18-4fd3-89ec-1eb4a2c100f0)
-
 
 ---
 
@@ -78,7 +68,7 @@ The system effectively generates audio summaries from IEEE research papers, enha
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/deepan484/Reasearch_Echopedia.git
+   git clone https://github.com/deepan484/Research_Echopedia.git
    ```
    
 2. Install dependencies:
@@ -92,6 +82,4 @@ The system effectively generates audio summaries from IEEE research papers, enha
    ```bash
    python app.py
    ```
-
----
 
