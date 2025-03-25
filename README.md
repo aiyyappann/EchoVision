@@ -76,10 +76,6 @@ _Flow chart depicting the conversion of an input PDF into text, summarizing it, 
 
 EchoVision effectively generates both audio summaries and Braille PDFs, making textual content more accessible for visually impaired individuals. The system fosters greater independence and inclusivity by providing essential outputs that can be used on the go.
 
----
-
-## 🔧 Installation
-
 ## 🔧 Installation
 
 1. Clone the repository:
@@ -117,7 +113,7 @@ EchoVision effectively generates both audio summaries and Braille PDFs, making t
 
 4. **Braille Display**  
    ![Braille Display](/images/image-3.png)  
-   _Preview of the Braille content._
+   _Braille content generated._
 
 5. **Braille PDF Download**  
    ![Braille PDF Download](/images/image-4.png)  
