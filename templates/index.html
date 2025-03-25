@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Helper Buddy For the Differently Abled</title>
+    <title>Helper Buddy</title>
     <!-- Google Fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
@@ -141,7 +141,7 @@
         border: 1px solid rgba(247, 154, 154, 0.1);
       }
 
-      @media (max-width: 768px) {
+      /* @media (max-width: 768px) {
         .container {
           padding: 2rem;
           width: 90%;
@@ -149,6 +149,19 @@
 
         h1 {
           font-size: 2.5rem;
+        }
+      } */
+      @media (max-width: 768px) {
+        .container {
+          padding: 1.5rem;
+          margin: 1rem;
+        }
+        h1 {
+          font-size: 2rem;
+        }
+        .braille-output {
+          font-size: 1.2rem;
+          padding: 1rem;
         }
       }
 
@@ -168,11 +181,144 @@
       .floating-element {
         animation: float 4s ease-in-out infinite;
       }
+      .audio-container {
+        margin: 1.5rem 0;
+      }
+      .audio-container audio {
+        width: 100%;
+        margin-top: 1rem;
+      }
+    </style>
+
+    <style>
+      /* (Existing CSS unchanged) */
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        color: #ffffff;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem 0;
+      }
+      .container {
+        max-width: 800px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        margin: auto;
+        padding: 2.5rem;
+        text-align: center;
+      }
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+        color: #ffffff;
+      }
+      label {
+        font-weight: 400;
+        color: #f0f0f0;
+      }
+      .btn-custom {
+        background: linear-gradient(135deg, #ff7eb3, #ff758c);
+        color: #ffffff;
+        font-size: 1.2rem;
+        padding: 0.7rem 1.5rem;
+        border: none;
+        border-radius: 30px;
+        margin-top: 1rem;
+        transition: all 0.3s ease-in-out;
+      }
+      .btn-custom:hover {
+        background: linear-gradient(135deg, #ff758c, #ff3d68);
+        transform: scale(1.05);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      }
+      .results-section {
+        margin-top: 2.5rem;
+        text-align: left;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 1.5rem;
+        border-radius: 15px;
+      }
+      .results-section h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        color: #ffffff;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        padding-bottom: 0.5rem;
+      }
+      .audio-container {
+        margin: 1.5rem 0;
+      }
+      .audio-container audio {
+        width: 100%;
+        margin-top: 1rem;
+      }
+      .btn-download {
+        margin-top: 1rem;
+        background: linear-gradient(135deg, #36d1dc, #5b86e5);
+        color: #ffffff;
+        border: none;
+        padding: 0.7rem 1.5rem;
+        border-radius: 30px;
+        font-size: 1rem;
+        transition: all 0.3s ease-in-out;
+        display: inline-block;
+      }
+      .btn-download:hover {
+        background: linear-gradient(135deg, #5b86e5, #36d1dc);
+        transform: scale(1.05);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      }
+      .braille-output {
+        background-color: rgba(0, 0, 0, 0.2);
+        padding: 1.5rem;
+        border-radius: 10px;
+        margin-top: 1rem;
+        font-family: "Courier New", monospace;
+        font-size: 1.5rem;
+        line-height: 2rem;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+      .summary-text {
+        background-color: rgba(0, 0, 0, 0.1);
+        padding: 1.5rem;
+        border-radius: 10px;
+        line-height: 1.6;
+      }
+      .action-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 1.5rem;
+        flex-wrap: wrap;
+      }
+      @media (max-width: 768px) {
+        .container {
+          padding: 1.5rem;
+          margin: 1rem;
+        }
+        h1 {
+          font-size: 2rem;
+        }
+        .braille-output {
+          font-size: 1.2rem;
+          padding: 1rem;
+        }
+      }
     </style>
   </head>
   <body>
     <div class="container">
-      <h1>Buddy</h1>
+      <h1>EchoVision</h1>
       <p>
         Upload your file and get a summarized audio file with Braille pdf as
         well!
