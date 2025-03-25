@@ -1,41 +1,41 @@
 # EchoVision 🎤📚
 
-**Transforming IEEE-format Research Papers into Concise, Portable Audio Summaries**
+**Enhancing Accessibility for the Visually Impaired through Audio and Braille Summaries**
 
 ---
 
 ## 📖 Overview
 
-The **EchoVision** project enhances the accessibility of IEEE-format research papers by converting dense technical content into concise, portable audio summaries. This system uses a three-stage pipeline:
+The **EchoVision** project helps visually impaired individuals by converting text-based documents into concise, portable audio summaries. It also provides Braille PDFs of these summaries, which can be printed using Braille printers. This system uses a three-stage pipeline:
 1. **Text Extraction** with **pdfplumber**
 2. **Summarization** with **AWS Bedrock's LLaMA model**
-3. **Audio Conversion** using **Amazon Polly**
+3. **Audio Conversion** using **Amazon Polly** (with Braille PDF generation)
 
-The downloadable audio outputs provide a flexible and engaging way to consume academic content on the go. By integrating advanced technologies, this solution bridges the gap in academic dissemination.
+The downloadable audio and Braille outputs provide a flexible and engaging way to consume content on the go, enhancing accessibility and independence.
 
 ---
 
 ## ⚙️ Methodology
 
 ### 1️⃣ **Input and Parsing**  
-The system accepts IEEE-format PDF papers, extracting text from both columns using **pdfplumber**.
+The system accepts PDF documents, extracting text efficiently using **pdfplumber**.
 
-- **Input Format Handling**: Supports PDF files, typical in academic dissemination.
-- **Text Extraction**: Uses pdfplumber to handle complex layouts with two columns, ensuring accurate content capture.
+- **Input Format Handling**: Supports various text-based PDF files.
+- **Text Extraction**: Uses pdfplumber to accurately capture document content.
 - **Preprocessing**: Text cleaning, normalization, and segmentation for effective summarization.
 
 ### 2️⃣ **Summarization**  
-The preprocessed text is fed into **AWS Bedrock’s LLaMA model** to generate clear and concise summaries of the research paper.
+The preprocessed text is fed into **AWS Bedrock’s LLaMA model** to generate clear and concise summaries.
 
-- **Model Selection**: AWS LLaMA model optimized for academic summarization.
+- **Model Selection**: AWS LLaMA model optimized for text summarization.
 - **Summarization Process**: The text is formatted to generate a precise summary, retaining key insights.
-  
-### 3️⃣ **Audio Conversion**  
-**Amazon Polly** is used to convert the summarized text into natural-sounding speech.
+
+### 3️⃣ **Audio Conversion and Braille PDF Generation**  
+**Amazon Polly** is used to convert the summarized text into natural-sounding speech, while Braille PDFs of the summaries are also generated for printing with Braille printers.
 
 - **Audio Generation**: High-quality MP3 audio compatible across devices.
 - **Audio Enhancement**: Volume normalization and trimming for improved listening experience.
-- **Downloadable Audio**: Users can download the MP3 audio for offline access.
+- **Downloadable Outputs**: Users can download both the MP3 audio and Braille PDFs for offline access.
 
 ---
 
@@ -44,7 +44,7 @@ The preprocessed text is fed into **AWS Bedrock’s LLaMA model** to generate cl
 - **[AWS Bedrock](https://aws.amazon.com/bedrock/)**: Powerful AI models like LLaMA for text summarization.
 - **[Amazon Polly](https://aws.amazon.com/polly/)**: Converts text to natural, human-like speech.
 - **[Boto3](https://boto3.amazonaws.com/)**: AWS SDK for Python, enabling seamless interaction with AWS services.
-- **[Azure Web Service](https://azure.microsoft.com/en-us/services/web-apps/)**: Platform-as-a-Service (PaaS) for hosting the Flask application.
+- **[Azure Web App Services](https://azure.microsoft.com/en-us/services/app-service/web/)**: Hosting the Flask application.
 
 ---
 
@@ -52,15 +52,16 @@ The preprocessed text is fed into **AWS Bedrock’s LLaMA model** to generate cl
 
 - **Custom Parsing Logic**: Tailored adjustments to pdfplumber for precise text extraction.
 - **Error Handling**: Robust mechanisms to detect and handle issues during processing.
-- **User-Friendly Interface**: Easy upload of PDF files, summary viewing, and audio download.
+- **User-Friendly Interface**: Easy upload of PDF files, summary viewing, and downloadable outputs.
 - **Configurable Summarization**: Customizable summary length and detail level.
 - **Audio Playback**: Immediate audio playback functionality for instant listening.
+- **Braille PDF Generation**: Creates Braille PDFs of the summaries for printing with Braille printers.
 
 ---
 
 ## 🏆 Results
 
-The system effectively generates audio summaries from IEEE research papers, enhancing academic content accessibility. It allows users to consume complex research on-the-go, whether for study, research, or leisure.
+The system effectively generates both audio summaries and Braille PDFs, making textual content more accessible for visually impaired individuals. It allows users to consume important information on the go, fostering greater independence and inclusivity.
 
 ---
 
